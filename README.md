@@ -4,73 +4,47 @@ Houston [last name] · Partner: [name, or remove this line]
 
 Final Project for INFO 4617 Web Data Science, CU Boulder, Fall 2026.
 
-## Research question
+This project asks how the City of Boulder's marijuana tax revenue changed from 2018 to 2024, and whether its share of the city's total sales and use tax rose or fell over those years. The answer comes from the Finance Department's year-end revenue reports, published as PDFs in the city's public records portal, which present one year at a time; this project builds them into one series. City Council and the Finance Department set Boulder's marijuana taxes, and a multi-year series shows how much of the budget depends on one industry. The full plan is in [proposal.md](proposal.md).
 
-How did the City of Boulder's marijuana tax revenue change from 2018 to 2024, and did its share of the city's total sales and use tax rise or fall over those years?
+## Data
 
-## Data source
+Seven year-end revenue reports, 2018 through December 2024, from the [Revenue Reports folder](https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=194345&dbid=0&repo=LF8PROD2) of the City of Boulder's records portal. Each report covers its year and the year before, so the series runs from 2017 to 2024.
 
-The year-end revenue reports in the [Revenue Reports folder](https://documents.bouldercolorado.gov/WebLink/Browse.aspx?id=194345&dbid=0&repo=LF8PROD2) of the City of Boulder's records portal, published as PDFs by the Finance Department.
+| Report | Document ID |
+|---|---|
+| Revenue Report 2018 | 194398 |
+| Revenue Report 2019 | 194399 |
+| Revenue Report 2020 | 194400 |
+| Revenue Report 2021.12 | 194358 |
+| Revenue Report 2022.12 | 194371 |
+| Revenue Report 2023.12 | 194384 |
+| Revenue Report 2024.12 | 194397 |
 
-| Report | Portal location | Document ID |
-|---|---|---|
-| Revenue Report 2018 | Revenue Reports folder | 194398 |
-| Revenue Report 2019 | Revenue Reports folder | 194399 |
-| Revenue Report 2020 | Revenue Reports folder | 194400 |
-| December 2021 report | 2021 folder (194346) | found by `01_collection.ipynb` |
-| December 2022 report | 2022 folder (194359) | found by `01_collection.ipynb` |
-| December 2023 report | 2023 folder (194372) | found by `01_collection.ipynb` |
-| Revenue Report 2024.12 | 2024 folder (194385) | 194397 |
+The PDFs are in [`data/raw/`](data/raw/), and [`data/README.md`](data/README.md) records when each was downloaded and its size. The figures are citywide totals with no taxpayer names; staff contact details printed on report covers are left out of the dataset.
 
-Each report covers its year and the year before, so the series runs from 2017 to 2024.
+## Methods
 
-## Method
+- **Collection** ([`notebooks/01_collection.ipynb`](notebooks/01_collection.ipynb)): requests the portal's JSON folder listing, as the folder page does (Chapter 8), to find each report's ID, then downloads each report once, with an identifying User-Agent and 30 seconds between requests.
+- **Extraction** (to come): pypdf and pdfplumber for pages with a text layer, and Tesseract OCR for charts that are images (Chapter 9).
+- **Analysis** (to come): marijuana revenue by year and type, its change from the year before, and its share of total sales and use tax.
 
-- **Finding the files (Chapter 8, dynamic pages):** the portal's folder pages are filled in by JavaScript; the notebook requests the same JSON listing the page uses (`FolderListingService.aspx/GetFolderListing2`).
-- **Reading the files (Chapter 9, PDFs):** pypdf and pdfplumber for pages with a text layer, and Tesseract OCR for charts that are images.
-- **Analysis:** marijuana revenue by year and type, its change from the year before, and its share of total sales and use tax.
+## Findings
 
-## Repository layout
+To come.
 
-```
-├── README.md            # this file
-├── environment.yml      # the Python packages and versions this project uses
-├── .gitignore           # keeps keys and temporary files out of the repository
-├── data/
-│   ├── raw/             # the PDFs as downloaded; never edited
-│   ├── processed/       # tables extracted from the PDFs
-│   └── README.md        # where each file came from and when
-├── notebooks/
-│   └── 01_collection.ipynb
-├── scripts/
-└── output/
-    ├── figures/
-    └── tables/
-```
+## How to reproduce
 
-## Setup
+1. Create the environment and start Jupyter from Anaconda Prompt, in this folder:
 
-From Anaconda Prompt, in this folder:
+   ```
+   conda env create -f environment.yml
+   conda activate boulder-revenue
+   jupyter notebook
+   ```
 
-```
-conda env create -f environment.yml
-conda activate boulder-revenue
-jupyter lab
-```
-
-Start Jupyter from the activated prompt, so Tesseract can find its DLLs and language files. The notebooks also need `boulder-ca-bundle.pem`, the certificate bundle from Chapter 9, saved in `data/`.
-
-## Collection rules
-
-- Every request sends a User-Agent with a contact address.
-- 30 seconds between requests, and each file is downloaded once; later runs read the saved copy.
-- About 11 requests in all. Chapter 9 reports that the portal stopped answering after 13 to 17 requests in a row on October 6, 2026.
-- Certificates are checked with the bundle; verification is never turned off.
-- [robots.txt and the portal's terms: state what they say once checked.]
-
-## Personal information
-
-The figures are citywide totals with no taxpayer names. Report covers can name city staff with contact details; those are left out of the dataset.
+   Start Jupyter from the activated prompt, so Tesseract can find its DLLs and language files.
+2. Save `boulder-ca-bundle.pem`, the certificate bundle from Chapter 9 of *Web Data Science*, in `data/`.
+3. Put your email address in `HEADERS` in `notebooks/01_collection.ipynb`, and run it. Files already in `data/raw/` are not downloaded again.
 
 ## AI assistance
 

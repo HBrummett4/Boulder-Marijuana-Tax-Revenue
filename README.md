@@ -1,6 +1,6 @@
 # Boulder Marijuana Tax Revenue, 2017–2024
 
-Houston [last name] · Partner: [name, or remove this line]
+Houston Brummett
 
 Final Project for INFO 4617 Web Data Science, CU Boulder, Fall 2026.
 
@@ -42,9 +42,25 @@ To come.
    jupyter notebook
    ```
 
-   Start Jupyter from the activated prompt, so Tesseract can find its DLLs and language files.
-2. Save `boulder-ca-bundle.pem`, the certificate bundle from Chapter 9 of *Web Data Science*, in `data/`.
-3. Put your email address in `HEADERS` in `notebooks/01_collection.ipynb`, and run it. Files already in `data/raw/` are not downloaded again.
+```
+conda env create -f environment.yml
+conda activate boulder-revenue
+jupyter notebook
+```
+
+Start Jupyter from the activated prompt, so Tesseract can find its DLLs and language files. Save `boulder-ca-bundle.pem`, the certificate bundle from Chapter 9 of *Web Data Science*, in `data/`. Put your email address in `HEADERS` in `notebooks/01_collection.ipynb`, and run it. Files already in `data/raw/` are not downloaded again.
+
+## Collection rules
+
+- Every request sends a User-Agent with a contact address.
+- 30 seconds between requests, and each file is downloaded once; later runs read the saved copy.
+- About 11 requests in all. Chapter 9 reports that the portal stopped answering after 13 to 17 requests in a row on October 6, 2026.
+- Certificates are checked with the bundle; verification is never turned off.
+- [robots.txt and the portal's terms: state what they say once checked.]
+
+## Personal information
+
+The figures are citywide totals with no taxpayer names. Report covers can name city staff with contact details; those are left out of the dataset.
 
 ## AI assistance
 

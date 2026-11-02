@@ -1,6 +1,6 @@
 # Boulder Marijuana Tax Revenue, 2017–2024
 
-Houston [last name] · Partner: [name, or remove this line]
+Houston Brummett
 
 Final Project for INFO 4617 Web Data Science, CU Boulder, Fall 2026.
 

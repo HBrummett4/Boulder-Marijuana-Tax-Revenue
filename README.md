@@ -55,7 +55,7 @@ From Anaconda Prompt, in this folder:
 ```
 conda env create -f environment.yml
 conda activate boulder-revenue
-jupyter lab
+jupyter notebook
 ```
 
 Start Jupyter from the activated prompt, so Tesseract can find its DLLs and language files. The notebooks also need `boulder-ca-bundle.pem`, the certificate bundle from Chapter 9, saved in `data/`.

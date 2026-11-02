@@ -1,0 +1,14 @@
+name: boulder-revenue
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - jupyterlab
+  - requests
+  - pandas
+  - matplotlib
+  - pypdf=6.21.1
+  - pdfplumber=0.11.10
+  - pytesseract=0.3.13
+  - tesseract=5.5.2
+  - libcurl

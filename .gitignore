@@ -1,0 +1,12 @@
+# Keys and secrets: never commit these
+api_keys.json
+.env
+
+# Jupyter and Python temporary files
+.ipynb_checkpoints/
+__pycache__/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini

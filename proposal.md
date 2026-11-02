@@ -1,6 +1,6 @@
 # Final Project Proposal
 
-Houston [last name] · Partner: [name, or remove this line]
+Houston Brummett
 
 ## 1. Research question
 
